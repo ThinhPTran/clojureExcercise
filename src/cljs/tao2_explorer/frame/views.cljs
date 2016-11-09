@@ -74,9 +74,9 @@
         [rui/drawer {:open @isshowleft}
          [drawer]]
        ;; 256px left padding to make space for drawer
-          (if @isshowleft [:div {:style {:padding-left "256px" :margin "25px"}}
-                           [(:page (nth pages-list @selected-index))]]
-                          [:div {:style {:padding-left "5px" :margin "25px"}}
-                           [(:page (nth pages-list @selected-index))]])
+        (if @isshowleft [:div {:style {:padding-left "256px" :margin "25px"}}
+                         [(:page (nth pages-list @selected-index))]]
+                        [:div {:style {:padding-left "5px" :margin "25px"}}
+                         [(:page (nth pages-list @selected-index))]])]])))
 
-                 ]])))
+

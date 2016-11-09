@@ -4,6 +4,6 @@
             [goog.string :as gstring]
             [goog.string.format]))
 
-(reg-sub :tao2/data-sources-list
-  (fn [db [_]]
-    (get-in )))
+;(reg-sub :tao2/data-sources-list
+;  (fn [db [_]]
+;    (get-in )))
