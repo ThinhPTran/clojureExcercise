@@ -13,11 +13,16 @@
       (let [rowIdx (first (first changeData))
             colIdx (second (first changeData))
             oldVal (nth (first changeData) 2)
-            newVal (nth (first changeData) 3)]
+            newVal (nth (first changeData) 3)
+            tableconfig (get-in db [:test-highcharts :tableconfig])
+            tabledata (get-in tableconfig [:data])]
         (println changeData)
         (println rowIdx)
         (println colIdx)
         (println oldVal)
         (println newVal)
-        (assoc-in db [:khongbiet :haha] "")))))
+        (println tableconfig)
+        (println tabledata)))))
 
+
+;; (assoc-in db [:test-highcharts :tableconfig] nil)
