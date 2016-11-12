@@ -52,6 +52,10 @@
 ;   :contextMenu true
 ;   })
 
+(defn foo
+  []
+  println "hello")
+
 (defn gen-chart-config-handson
   [tableconfig]
   (let [ret (reagent/atom {
@@ -88,7 +92,7 @@
 
 (defn sampleTable-did-mount [this]
   (let [[_ tableconfig] (reagent/argv this)
-        tableconfigext (assoc tableconfig :afterChange #(dispatch [:test-highcharts/set-tablevalue %]))]
+        tableconfigext tableconfig]
     (do
       (println tableconfig)
       (println tableconfigext)
