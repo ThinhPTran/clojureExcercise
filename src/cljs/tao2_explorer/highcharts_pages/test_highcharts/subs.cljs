@@ -1,6 +1,7 @@
 (ns tao2-explorer.highcharts-pages.test-highcharts.subs
   (:require [re-frame.core :refer [register-sub reg-sub dispatch]]
-            [reagent.ratom :as ratom]))
+            [reagent.ratom :as ratom]
+            [tao2-explorer.highcharts-pages.test-highcharts.events]))
 
 (reg-sub :test-highcharts/chartname
          (fn [db _]
@@ -16,5 +17,5 @@
                                                                      ["2010" 30 15 12 5]]
                                                        :rowHeaders  false
                                                        :colHeaders  false
-                                                       :contextMenu true})))
+                                                       :contextMenu false})))
 

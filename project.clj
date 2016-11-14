@@ -8,7 +8,7 @@
                  [cljs-react-material-ui "0.2.21"]
                  [com.taoensso/timbre "4.7.4"]
                  [re-frame "0.8.0"]
-                 [cljsjs/highcharts "4.2.5-2"]
+                 [cljsjs/highcharts "4.2.6-1"]
                  [cljsjs/handsontable "0.26.1-0"]]
 
 

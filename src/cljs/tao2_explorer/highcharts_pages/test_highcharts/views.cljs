@@ -52,9 +52,9 @@
 ;   :contextMenu true
 ;   })
 
-(defn foo
-  []
-  println "hello")
+;(defn foo
+;  []
+;  println "hello")
 
 (defn gen-chart-config-handson
   [tableconfig]
@@ -82,6 +82,8 @@
           data2 (assoc {} :name (str (first (get tabledata 2))) :data (vec (rest (get tabledata 2))))
           data3 (assoc {} :name (str (first (get tabledata 3))) :data (vec (rest (get tabledata 3))))
           mydata (conj [] data1 data2 data3)]
+      ;(println data1)
+      ;(println data2)
       (swap! ret assoc-in [:xAxis :categories] categories)
       (swap! ret assoc-in [:series] mydata))
     ret))
@@ -92,10 +94,10 @@
 
 (defn sampleTable-did-mount [this]
   (let [[_ tableconfig] (reagent/argv this)
-        tableconfigext tableconfig]
+        tableconfigext (assoc-in tableconfig [:afterChange] #(dispatch [:test-highcharts/set-tablevalue tableconfig %]))]
     (do
       (println tableconfig)
-      (println tableconfigext)
+      (.log js/console "table did mount!!!\n")
       (js/Handsontable (reagent/dom-node this) (clj->js tableconfigext)))))
 
 (defn sampleTable [tableconfig]
@@ -107,13 +109,24 @@
 
 (defn sampleHighchart-did-mount [this]
   (let [[_ tableconfig] (reagent/argv this)
+        my-chart-config (gen-chart-config-handson tableconfig)]))
+
+
+(defn sampleHighchart-did-update [this]
+  (let [[_ tableconfig] (reagent/argv this)
         my-chart-config (gen-chart-config-handson tableconfig)]
-     (js/Highcharts.Chart. (reagent/dom-node this) (clj->js @my-chart-config))))
+    (do
+      (.log js/console "highchart did update")
+      (println @my-chart-config)
+      (println (get-in @my-chart-config [:series]))
+      (js/Highcharts.Chart. (reagent/dom-node this) (clj->js @my-chart-config))
+      (js/Highcharts.Renderer. (reagent/dom-node this)))))
 
 
 (defn sampleHighchart [tableconfig]
   (reagent/create-class {:reagent-render      sampleHighchart-render
-                         :component-did-mount sampleHighchart-did-mount}))
+                         :component-did-mount sampleHighchart-did-mount
+                         :component-did-update sampleHighchart-did-update}))
 
 
 (defn test-highcharts-page
