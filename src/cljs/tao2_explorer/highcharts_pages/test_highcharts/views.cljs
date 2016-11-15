@@ -96,13 +96,14 @@
   (let [[_ tableconfig] (reagent/argv this)
         tableconfigext (assoc-in tableconfig [:afterChange] #(dispatch [:test-highcharts/set-tablevalue tableconfig %]))]
     (do
-      (println tableconfig)
+      ;(println tableconfig)
       (.log js/console "table did mount!!!\n")
       (js/Handsontable (reagent/dom-node this) (clj->js tableconfigext)))))
 
 (defn sampleTable [tableconfig]
   (reagent/create-class {:reagent-render      sampleTable-render
                          :component-did-mount sampleTable-did-mount}))
+
 
 (defn sampleHighchart-render []
   [:div {:style {:min-width "310px" :max-width "800px" :margin "0 auto"}}])
@@ -125,7 +126,6 @@
   (reagent/create-class {:reagent-render      sampleHighchart-render
                          :component-did-mount sampleHighchart-did-mount
                          :component-did-update sampleHighchart-did-update}))
-
 
 (defn test-highcharts-page
   []
