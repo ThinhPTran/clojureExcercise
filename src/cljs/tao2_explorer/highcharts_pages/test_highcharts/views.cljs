@@ -109,19 +109,17 @@
 
 (defn sampleHighchart-did-mount [this]
   (let [[_ tableconfig] (reagent/argv this)
-        my-chart-config (gen-chart-config-handson tableconfig)]))
-
+        my-chart-config (gen-chart-config-handson tableconfig)]
+    (js/Highcharts.Chart. (reagent/dom-node this) (clj->js @my-chart-config))))
 
 (defn sampleHighchart-did-update [this]
   (let [[_ tableconfig] (reagent/argv this)
         my-chart-config (gen-chart-config-handson tableconfig)]
     (do
       (.log js/console "highchart did update")
-      (println @my-chart-config)
+      ;(println @my-chart-config)
       (println (get-in @my-chart-config [:series]))
-      (js/Highcharts.Chart. (reagent/dom-node this) (clj->js @my-chart-config))
-      (js/Highcharts.Renderer. (reagent/dom-node this)))))
-
+      (js/Highcharts.Chart. (reagent/dom-node this) (clj->js @my-chart-config)))))
 
 (defn sampleHighchart [tableconfig]
   (reagent/create-class {:reagent-render      sampleHighchart-render

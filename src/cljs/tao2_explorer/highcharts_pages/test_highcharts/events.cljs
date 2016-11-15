@@ -14,8 +14,9 @@
             oldVal (nth (first changeData) 2)
             newVal (nth (first changeData) 3)
             dataTable (get-in tableconfig [:data] nil)
-            newDataTable (assoc-in dataTable [rowIdx colIdx] newVal)
-            newtablecofig (assoc-in tableconfig [:data] newDataTable)]
+            newDataTable (assoc-in dataTable [rowIdx colIdx] (js/parseInt newVal))
+            newtablecofig (assoc-in tableconfig [:data] newDataTable)
+            newdb (assoc-in db [:test-highcharts :tableconfig] newtablecofig)]
         ;(println rowIdx)
         ;(println colIdx)
         ;(println oldVal)
@@ -24,10 +25,6 @@
         ;(println dataTable)
         ;(println newDataTable)
         ;(println newtablecofig)
-        (assoc-in db [:test-highcharts :tableconfig] newtablecofig))))
+        ;(println newdb)
+        newdb)))
 
-
-
-
-
-;; (assoc-in db [:test-highcharts :tableconfig] nil)
