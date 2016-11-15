@@ -11,14 +11,14 @@
 
 (reg-event-db
   :test-highcharts/set-tablevalue
-  (fn [db [_ tableconfig changeData]]
+  (fn [db [_ changeData]]
       (let [rowIdx (first (first changeData))
             colIdx (second (first changeData))
             oldVal (nth (first changeData) 2)
             newVal (nth (first changeData) 3)
             dataTable (get-in db [:test-highcharts :tableconfig :data] (:data t2db/init-tableconfig))
             newDataTable (assoc-in dataTable [rowIdx colIdx] (js/parseInt newVal))
-            newtablecofig (assoc-in tableconfig [:data] newDataTable)
+            newtablecofig (assoc-in t2db/init-tableconfig [:data] newDataTable)
             newdb (assoc-in db [:test-highcharts :tableconfig] newtablecofig)]
         ;(println rowIdx)
         ;(println colIdx)
